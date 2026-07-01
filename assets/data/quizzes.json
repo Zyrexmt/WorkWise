@@ -1,0 +1,39 @@
+[
+    {
+        "titulo": "Segurança no trabalho",
+        "data": "02/02/2024",
+        "perguntas": [
+            {
+                "enunciado": "Como se deve utilizar o protetor auricular?",
+                "alternativas": ["No pescoço", "No ouvido", "Na nuca"],
+                "correta": 1
+            },
+            {
+                "enunciado": "A bota de segurança é usada para:",
+                "alternativas": ["Corrida", "Jogar bola", "Proteger contra objetos perfurantes"],
+                "correta": 2 
+            },
+            {
+                "enunciado": "A faixa zebrada serve para:",
+                "alternativas": ["Marcar golzinho na rua", "Delimiitar uma área restrita", "Amarrar o cachorro"],
+                "correta":  1
+            }
+        ]
+    },
+    {
+        "titulo": "Inteligência emocional",
+        "data": "03/05/2024",
+        "perguntas": [
+            {
+                "enunciado": "Caso alguém faça uma brincadeira ofensiva com um colega, devemos:",
+                "alternativas": ["Partir para a briga", "Primeiramente conversar sobre o ocorrido", "Chamar a polícia"],
+                "correta":  1
+            },
+            {
+                "enunciado": "Quais alternativa que mostra apenas assuntos sensíveis e devem ser evitados em ambiente de trabalho?",
+                "alternativas": ["Política, religião e futebol", "Churrasco, café e religião", "Notícias, esportes e games"],
+                "correta":  0
+            }
+        ]
+    }
+]

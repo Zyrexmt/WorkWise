@@ -1,0 +1,30 @@
+[
+    {
+        "nome": "Aristóteles",
+        "email": "ari_malvadao@exemplo.com",
+        "senha": "ariari",
+        "pergunta": "Qual a data de nascimento?",
+        "resposta": "23"
+    },
+        {
+        "nome": "Frajola",
+        "email": "frazinho_furacao@exemplo.com",
+        "senha": "frafra",
+        "pergunta": "Qual a raça de seu gato?",
+        "resposta": "Frajola"
+    },
+        {
+        "nome": "Canabrava",
+        "email": "canabrava51@exemplo.com",
+        "senha": "cancan",
+        "pergunta": "Qual a cor da bebida preferida?",
+        "resposta": "Transparente"
+    },
+        {
+        "nome": "Arthurito",
+        "email": "arturo@exemplo.com",
+        "senha": "artart",
+        "pergunta": "Qual a altura?",
+        "resposta": "1,70m"
+    }
+]
