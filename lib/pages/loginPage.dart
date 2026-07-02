@@ -151,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: 30),
 
                   TextButton(
-                    onPressed: controlesAtivos ? () => Navigator.pushReplacementNamed(context, '/home') : null,
+                    onPressed: controlesAtivos ? () => Navigator.pushReplacementNamed(context, '/forgot') : null,
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.transparent,
                       foregroundColor: corAzulClaro,

@@ -15,19 +15,27 @@ class JsonDBService {
 
   Future<void> loadAll() async {
     if (_loaded) return;
-    users = await _loadReadOnly('users.json');
-    quizzes = await _loadReadOnly('quizzes.json');
+    users = await _loadOrCopy('users.json');
+    quizzes = await _loadOrCopy('quizzes.json');
     _loaded = true;
     print('Carregado');
-    ;
   }
 
-  Future<List<Map<String, dynamic>>> _loadReadOnly(
+  Future<List<Map<String, dynamic>>> _loadOrCopy(
     String fileName,
   ) async {
-    final raw = await rootBundle.loadString('assets/data/$fileName');
-    print('readOnly - fase 1');
-    return List<Map<String, dynamic>>.from(jsonDecode(raw));
+    final file = await _localFile(fileName);
+
+    if (await file.exists()) {
+      final raw = await file.readAsString();
+      return List<Map<String, dynamic>>.from(jsonDecode(raw));
+    } else {
+      final raw = await rootBundle.loadString(
+        'assets/data/$fileName',
+      );
+      await file.writeAsString(raw);
+      return List<Map<String, dynamic>>.from(jsonDecode(raw));
+    }
   }
 
   Future<File> _localFile(String fileName) async {
@@ -62,6 +70,12 @@ class JsonDBService {
     if (user == null) return false;
     return user['resposta'].toString().toLowerCase() ==
         resposta.toLowerCase();
+  }
+
+  String buscarPerguntaByEmail(String email) {
+    final user = findUserByEmail(email);
+    if (user == null) return 'Digite um email válido';
+    return user['pergunta'].toString();
   }
 
   Future<void> alterarSenha(String email, String novaSenha) async {
