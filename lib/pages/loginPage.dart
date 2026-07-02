@@ -62,8 +62,10 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     final resultado = JsonDBService.instance.validarLogin(
-      email,
-      senha,
+      // email,
+      // senha,
+      'ari_malvadao@exemplo.com',
+      'ariari',
     );
 
     switch (resultado) {
@@ -121,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
     final controlesAtivos = !_bloqueadoTemporariamente;
 
     return Scaffold(
-      backgroundColor: corBranco,
+      backgroundColor: corCinza,
       body: Container(
         child: Center(
           child: Container(
@@ -135,8 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   Image.asset(
                     'assets/images/logomarca.png',
-                    width: 150,
-                    height: 150,
+                    width: MediaQuery.sizeOf(context).width * 0.2,
                   ),
                   SizedBox(height: 50),
                   _TextInput(true, 'Email', emailController, false),
@@ -145,13 +146,21 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: 30),
 
                   if (_bloqueadoTemporariamente)
-                    Text('Tente novamente em $_segundosRestantes s', style: TextStyle(color: Colors.red), ),
-                  
+                    Text(
+                      'Tente novamente em $_segundosRestantes s',
+                      style: TextStyle(color: Colors.red),
+                    ),
+
                   _textBTN('Entrar', controlesAtivos ? login : null),
                   SizedBox(height: 30),
 
                   TextButton(
-                    onPressed: controlesAtivos ? () => Navigator.pushReplacementNamed(context, '/forgot') : null,
+                    onPressed: controlesAtivos
+                        ? () => Navigator.pushReplacementNamed(
+                            context,
+                            '/forgot',
+                          )
+                        : null,
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.transparent,
                       foregroundColor: corAzulClaro,
@@ -207,6 +216,8 @@ class _LoginPageState extends State<LoginPage> {
             enabled: ativo,
             controller: controller,
             decoration: InputDecoration(
+              filled: true,
+              fillColor: corBranco,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.horizontal(),
                 borderSide: BorderSide(color: corPreto, width: 2),

@@ -58,6 +58,7 @@ class _ForgotPassPageState extends State<ForgotPassPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: corCinza,
       body: Container(
         width: MediaQuery.sizeOf(context).width,
         height: MediaQuery.sizeOf(context).height,
@@ -71,8 +72,7 @@ class _ForgotPassPageState extends State<ForgotPassPage> {
             children: [
               Image.asset(
                 'assets/images/logomarca.png',
-                width: 150,
-                height: 150,
+                width: MediaQuery.sizeOf(context).width * 0.2,
               ),
               SizedBox(height: 30),
               _textInput(
@@ -164,6 +164,8 @@ class _ForgotPassPageState extends State<ForgotPassPage> {
             enabled: ativo,
             controller: controller,
             decoration: InputDecoration(
+              fillColor: corBranco,
+              filled: true,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.horizontal(),
                 borderSide: BorderSide(color: corPreto, width: 2),

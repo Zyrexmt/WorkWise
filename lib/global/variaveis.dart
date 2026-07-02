@@ -7,3 +7,5 @@ final corAzulClaro = Color(0xff0084ad);
 final corPreto = Color(0xff333333);
 
 String emailNovaSenha = '';
+dynamic userGlobal;
+String tituloQuizzSalvo = '';

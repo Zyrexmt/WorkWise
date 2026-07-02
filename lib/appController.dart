@@ -3,6 +3,7 @@ import 'package:modulo_c1_v1/pages/forgotPassPage.dart';
 import 'package:modulo_c1_v1/pages/homePage.dart';
 import 'package:modulo_c1_v1/pages/loginPage.dart';
 import 'package:modulo_c1_v1/pages/newPassPage.dart';
+import 'package:modulo_c1_v1/pages/quizPage.dart';
 import 'package:modulo_c1_v1/pages/splashPage.dart';
 
 class AppController extends StatelessWidget {
@@ -19,6 +20,7 @@ class AppController extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/forgot': (context) => const ForgotPassPage(),
         '/passReset': (context) => const NewPassPage(),
+        '/quizz': (context) => const QuizzPage()
         
         
       }, initialRoute: '/splash',

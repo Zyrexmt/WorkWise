@@ -47,6 +47,7 @@ class _NewPassPageState extends State<NewPassPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: corCinza,
       body: Container(
         width: MediaQuery.sizeOf(context).width,
         height: MediaQuery.sizeOf(context).height,
@@ -57,8 +58,7 @@ class _NewPassPageState extends State<NewPassPage> {
             children: [
               Image.asset(
                 'assets/images/logomarca.png',
-                width: 150,
-                height: 150,
+                width: MediaQuery.sizeOf(context).width * 0.2,
               ),
               SizedBox(height: 30),
               _textFieldComponent(
@@ -111,6 +111,8 @@ class _NewPassPageState extends State<NewPassPage> {
             enabled: ativo,
             controller: controller,
             decoration: InputDecoration(
+              filled: true,
+              fillColor: corBranco,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.horizontal(),
                 borderSide: BorderSide(color: corPreto, width: 2),
@@ -126,7 +128,7 @@ class _NewPassPageState extends State<NewPassPage> {
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        backgroundColor: Colors.transparent,
+        backgroundColor: corBranco,
         foregroundColor: corPreto,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.horizontal(),

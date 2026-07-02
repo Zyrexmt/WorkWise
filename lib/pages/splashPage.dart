@@ -41,14 +41,16 @@ class _SplashPageState extends State<SplashPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: corCinza,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: MediaQuery.sizeOf(context).width * 0.6,
-              height: MediaQuery.sizeOf(context).width * 0.6,
-              child: Image.asset('assets/images/logomarca.png'),
+              width: MediaQuery.sizeOf(context).width * 0.2,
+              child: Image.asset(
+                'assets/images/logomarca.png',
+              ),
             ),
             SizedBox(height: 30),
             SizedBox(

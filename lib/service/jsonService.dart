@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:modulo_c1_v1/global/variaveis.dart';
 import 'package:path_provider/path_provider.dart';
 
 class JsonDBService {
@@ -62,6 +63,7 @@ class JsonDBService {
     final user = findUserByEmail(email);
     if (user == null) return 'email_invalido';
     if (user['senha'] != senha) return 'senha_invalida';
+    userGlobal = user;
     return 'ok';
   }
 
