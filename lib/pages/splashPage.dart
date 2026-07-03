@@ -47,7 +47,7 @@ class _SplashPageState extends State<SplashPage>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: MediaQuery.sizeOf(context).width * 0.2,
+              width: MediaQuery.sizeOf(context).width * 0.6,
               child: Image.asset(
                 'assets/images/logomarca.png',
               ),

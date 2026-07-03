@@ -22,6 +22,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  Future<void> logout() async {
+    userGlobal = null;
+    Navigator.pushReplacementNamed(context, '/login');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                 textAlign: TextAlign.justify,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: logout,
                 style: TextButton.styleFrom(
                   fixedSize: Size(double.infinity, 5),
                 ),
@@ -66,7 +71,12 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           SizedBox(width: 50),
-          Icon(Icons.account_circle_outlined, size: 70),
+          CircleAvatar(
+            backgroundImage: userGlobal['foto'] != null
+                ? AssetImage(userGlobal['foto'])
+                : null,
+            radius: 33,
+          ),
           SizedBox(width: 20),
         ],
       ),
@@ -112,7 +122,7 @@ class _HomePageState extends State<HomePage> {
   Widget _cardQuiz(int index) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushReplacementNamed(context, '/quizz');
+        Navigator.pushNamed(context, '/quizz');
         tituloQuizzSalvo = quiz[index]['titulo'];
       },
       child: Container(

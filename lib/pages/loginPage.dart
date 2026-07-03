@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _iniciarBloqueio() {
-    setState(() => _segundosRestantes = 25);
+    setState(() => _segundosRestantes = 15);
     _timerBloqueio?.cancel();
     _timerBloqueio = Timer.periodic(const Duration(seconds: 1), (
       timer,
@@ -62,10 +62,10 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     final resultado = JsonDBService.instance.validarLogin(
-      // email,
-      // senha,
-      'ari_malvadao@exemplo.com',
-      'ariari',
+      email,
+      senha,
+      // 'ari_malvadao@exemplo.com',
+      // 'ariari',
     );
 
     switch (resultado) {
@@ -124,6 +124,16 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       backgroundColor: corCinza,
+      appBar: AppBar(
+        backgroundColor: corCinza,
+        actions: [
+          IconButton(
+            onPressed: () =>
+                Navigator.pushReplacementNamed(context, '/sobre'),
+            icon: Icon(Icons.info),
+          ),
+        ],
+      ),
       body: Container(
         child: Center(
           child: Container(
@@ -156,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   TextButton(
                     onPressed: controlesAtivos
-                        ? () => Navigator.pushReplacementNamed(
+                        ? () => Navigator.pushNamed(
                             context,
                             '/forgot',
                           )

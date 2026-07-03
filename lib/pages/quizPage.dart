@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:modulo_c1_v1/global/variaveis.dart';
 import 'package:modulo_c1_v1/service/jsonService.dart';
@@ -12,8 +14,13 @@ class QuizzPage extends StatefulWidget {
 class _QuizzPageState extends State<QuizzPage> {
   int? _respostaSelecionada;
   Map<String, dynamic>? quizInfo;
+  bool acertou = false;
+  bool _acertou = false;
+  bool _respondendo = false;
+  bool _mostrarFeedback = false;
   int _perguntaAtual = 0;
-
+  int _pontos = 0;
+  int _totalPerguntas = 0;
   void initState() {
     super.initState();
     JsonDBService.instance.loadAll().then((_) {
@@ -24,6 +31,121 @@ class _QuizzPageState extends State<QuizzPage> {
         print(tituloQuizzSalvo);
       });
     });
+  }
+
+  Future<void> logout() async {
+    userGlobal = null;
+    Navigator.pushReplacementNamed(context, '/login');
+  }
+
+  void _mostarPopupTotal(String mensagem) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(height: 20),
+            Image.asset(
+              'assets/images/logomarca.png',
+              width: 60,
+              height: 60,
+            ),
+            const SizedBox(height: 16),
+            Text(mensagem, textAlign: TextAlign.center),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () =>
+                Navigator.pushReplacementNamed(context, '/home'),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> responderPergunta(int respostaCorreta) async {
+    if (_respondendo) return;
+    if (_respostaSelecionada == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Você deve selecionar alguma alternativa para responder esta pergunta.',
+          ),
+        ),
+      );
+      return;
+    }
+
+    final acertou = respostaCorreta == _respostaSelecionada;
+
+    setState(() {
+      _respondendo = true;
+      _mostrarFeedback = true;
+      _acertou = acertou;
+    });
+
+    final duracao = acertou
+        ? const Duration(seconds: 3)
+        : const Duration(seconds: 5);
+
+    Timer(duracao, () {
+      if (!mounted) return;
+      setState(() {
+        if (acertou) _pontos++;
+        _mostrarFeedback = false;
+        _respondendo = false;
+        _respostaSelecionada = null;
+        avancarPergunta();
+      });
+    });
+  }
+
+  Widget _overlayFeedback() {
+    return AnimatedOpacity(
+      opacity: _mostrarFeedback ? 1.0 : 0.0,
+      duration: const Duration(milliseconds: 400),
+      child: IgnorePointer(
+        child: Container(
+          color: Colors.transparent,
+          alignment: Alignment.center,
+          child: TweenAnimationBuilder(
+            tween: Tween(
+              begin: 0.0,
+              end: _mostrarFeedback ? 1.0 : 0.0,
+            ),
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.elasticOut,
+            builder: (context, valor, child) {
+              return Transform.scale(
+                scale: valor,
+                child: Icon(
+                  _acertou ? Icons.check_circle : Icons.cancel,
+                  color: _acertou ? Colors.green : Colors.red,
+                  size: 120,
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> avancarPergunta() async {
+    _totalPerguntas = (quizInfo!['perguntas'] as List).length;
+
+    double porcentagem = _pontos * 100 / _totalPerguntas;
+
+    if (_perguntaAtual < _totalPerguntas - 1) {
+      _perguntaAtual++;
+    } else if (_perguntaAtual == _totalPerguntas - 1) {
+      _mostarPopupTotal(
+        'Percentual de acerto: ${porcentagem.toStringAsFixed(1)} %',
+      );
+    }
   }
 
   @override
@@ -58,7 +180,7 @@ class _QuizzPageState extends State<QuizzPage> {
                 textAlign: TextAlign.justify,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: logout,
                 style: TextButton.styleFrom(
                   fixedSize: Size(double.infinity, 5),
                 ),
@@ -74,7 +196,12 @@ class _QuizzPageState extends State<QuizzPage> {
             ],
           ),
           SizedBox(width: 50),
-          Icon(Icons.account_circle_outlined, size: 70),
+          CircleAvatar(
+            backgroundImage: userGlobal['foto'] != null
+                ? AssetImage(userGlobal['foto'])
+                : null,
+            radius: 33,
+          ),
           SizedBox(width: 20),
         ],
       ),
@@ -125,15 +252,36 @@ class _QuizzPageState extends State<QuizzPage> {
                   return _alternativa(index, alternativa);
                 },
               ),
-              _textBTN('Responder', () {}),
+              _textBTN('Responder', () {
+                responderPergunta(
+                  perguntas[_perguntaAtual]['correta'],
+                );
+                print(_pontos);
+              }),
               _textBTN('Pular', () {
+                if (_respondendo) return;
                 if (_perguntaAtual < perguntas.length - 1) {
                   setState(() {
                     _perguntaAtual++;
                     _respostaSelecionada = -1;
                   });
+                } else if (_perguntaAtual == perguntas.length - 1) {
+                  double porcentagem =
+                      _pontos * 100 / _totalPerguntas;
+                  setState(() {
+                    if (porcentagem.isNaN) {
+                      _mostarPopupTotal(
+                        'Percentual de acerto: 0%',
+                      );
+                    } else {
+                      _mostarPopupTotal(
+                        'Percentual de acerto: ${porcentagem.toStringAsFixed(1)} %',
+                      );
+                    }
+                  });
                 }
               }),
+              _overlayFeedback(),
             ],
           ),
         ),

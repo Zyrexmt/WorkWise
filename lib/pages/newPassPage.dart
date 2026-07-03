@@ -47,6 +47,16 @@ class _NewPassPageState extends State<NewPassPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: corCinza,
+        actions: [
+          IconButton(
+            onPressed: () =>
+                Navigator.pushReplacementNamed(context, '/sobre'),
+            icon: Icon(Icons.info),
+          ),
+        ],
+      ),
       backgroundColor: corCinza,
       body: Container(
         width: MediaQuery.sizeOf(context).width,
