@@ -48,9 +48,7 @@ class _SplashPageState extends State<SplashPage>
           children: [
             Container(
               width: MediaQuery.sizeOf(context).width * 0.6,
-              child: Image.asset(
-                'assets/images/logomarca.png',
-              ),
+              child: Image.asset('assets/images/logomarca.png'),
             ),
             SizedBox(height: 30),
             SizedBox(

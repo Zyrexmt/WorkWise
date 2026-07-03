@@ -14,7 +14,10 @@ class AppController extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true, colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue)),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+      ),
       routes: {
         '/splash': (context) => const SplashPage(),
         '/login': (context) => const LoginPage(),
@@ -22,11 +25,9 @@ class AppController extends StatelessWidget {
         '/forgot': (context) => const ForgotPassPage(),
         '/passReset': (context) => const NewPassPage(),
         '/quizz': (context) => const QuizzPage(),
-        '/sobre': (context) => const SobrePage()
-
-        
-        
-      }, initialRoute: '/splash',
+        '/sobre': (context) => const SobrePage(),
+      },
+      initialRoute: '/splash',
     );
   }
 }

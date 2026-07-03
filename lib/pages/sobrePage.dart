@@ -34,7 +34,6 @@ class SobrePage extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
                 textAlign: TextAlign.justify,
-
               ),
               SizedBox(height: 50),
 

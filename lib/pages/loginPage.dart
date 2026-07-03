@@ -129,7 +129,10 @@ class _LoginPageState extends State<LoginPage> {
           child: Container(
             width: MediaQuery.sizeOf(context).width,
             height: MediaQuery.sizeOf(context).height,
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
+            padding: EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 25,
+            ),
             alignment: Alignment.topRight,
             child: SingleChildScrollView(
               child: Column(
@@ -149,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 160,),
+                  SizedBox(height: 160),
                   Image.asset(
                     'assets/images/logomarca.png',
                     width: MediaQuery.sizeOf(context).width * 0.2,

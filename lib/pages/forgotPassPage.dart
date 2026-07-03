@@ -72,20 +72,20 @@ class _ForgotPassPageState extends State<ForgotPassPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(
-                            context,
-                            '/sobre',
-                          );
-                        },
-                        icon: Icon(Icons.info),
-                      ),
-                    ],
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        '/sobre',
+                      );
+                    },
+                    icon: Icon(Icons.info),
                   ),
-                  SizedBox(height: 150,),
+                ],
+              ),
+              SizedBox(height: 150),
               Image.asset(
                 'assets/images/logomarca.png',
                 width: MediaQuery.sizeOf(context).width * 0.2,

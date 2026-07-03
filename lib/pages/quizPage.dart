@@ -270,9 +270,7 @@ class _QuizzPageState extends State<QuizzPage> {
                       _pontos * 100 / _totalPerguntas;
                   setState(() {
                     if (porcentagem.isNaN) {
-                      _mostarPopupTotal(
-                        'Percentual de acerto: 0%',
-                      );
+                      _mostarPopupTotal('Percentual de acerto: 0%');
                     } else {
                       _mostarPopupTotal(
                         'Percentual de acerto: ${porcentagem.toStringAsFixed(1)} %',
