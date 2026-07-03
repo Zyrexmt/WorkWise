@@ -124,27 +124,32 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       backgroundColor: corCinza,
-      appBar: AppBar(
-        backgroundColor: corCinza,
-        actions: [
-          IconButton(
-            onPressed: () =>
-                Navigator.pushReplacementNamed(context, '/sobre'),
-            icon: Icon(Icons.info),
-          ),
-        ],
-      ),
       body: Container(
         child: Center(
           child: Container(
             width: MediaQuery.sizeOf(context).width,
             height: MediaQuery.sizeOf(context).height,
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            alignment: Alignment.center,
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
+            alignment: Alignment.topRight,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            '/sobre',
+                          );
+                        },
+                        icon: Icon(Icons.info),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 160,),
                   Image.asset(
                     'assets/images/logomarca.png',
                     width: MediaQuery.sizeOf(context).width * 0.2,
@@ -166,10 +171,8 @@ class _LoginPageState extends State<LoginPage> {
 
                   TextButton(
                     onPressed: controlesAtivos
-                        ? () => Navigator.pushNamed(
-                            context,
-                            '/forgot',
-                          )
+                        ? () =>
+                              Navigator.pushNamed(context, '/forgot')
                         : null,
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.transparent,

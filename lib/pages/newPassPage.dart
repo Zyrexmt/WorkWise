@@ -26,7 +26,14 @@ class _NewPassPageState extends State<NewPassPage> {
     senha = senhaController.text.toString().trim();
     confirmarSenha = confirmarSenhaController.text.toString().trim();
 
-    if (senha == confirmarSenha) {
+    if (senhaController.text.isEmpty ||
+        confirmarSenhaController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Preencha todos os campos por favor.'),
+        ),
+      );
+    } else if (senha == confirmarSenha) {
       print(emailNovaSenha);
       JsonDBService.instance.alterarSenha(emailNovaSenha, senha);
       Timer(const Duration(seconds: 2), () {
@@ -47,25 +54,34 @@ class _NewPassPageState extends State<NewPassPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: corCinza,
-        actions: [
-          IconButton(
-            onPressed: () =>
-                Navigator.pushReplacementNamed(context, '/sobre'),
-            icon: Icon(Icons.info),
-          ),
-        ],
-      ),
       backgroundColor: corCinza,
       body: Container(
         width: MediaQuery.sizeOf(context).width,
         height: MediaQuery.sizeOf(context).height,
+        alignment: Alignment.topRight,
         child: Padding(
-          padding: EdgeInsetsGeometry.symmetric(horizontal: 10),
+          padding: EdgeInsetsGeometry.symmetric(
+            horizontal: 10,
+            vertical: 25,
+          ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        '/sobre',
+                      );
+                    },
+                    icon: Icon(Icons.info),
+                  ),
+                ],
+              ),
+              SizedBox(height: 160),
               Image.asset(
                 'assets/images/logomarca.png',
                 width: MediaQuery.sizeOf(context).width * 0.2,
