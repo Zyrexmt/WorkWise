@@ -1,4 +1,4 @@
-# Quiz App
+# WorkWise
 
 Aplicativo mobile desenvolvido em Flutter como projeto teste da modalidade **#08 – Desenvolvimento de Aplicativos Móveis** (WorldSkills — Seletiva Estadual do Paraná), Módulo C.
 
